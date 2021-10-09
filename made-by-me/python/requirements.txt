@@ -1,0 +1,6 @@
+pip3 install socket
+pip3 install threading
+pip3 install sys
+pip3 install PySocks
+
+Last one isn't needed as of the time i'm writing this code but when i get to adding my proxied methods it will be needed
